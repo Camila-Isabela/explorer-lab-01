@@ -8,7 +8,7 @@ const ccLogo = document.querySelector(".cc-logo span:nth-child(2) img")
 //################# BANDEIRA DO CARTÂO  #######################################
 
 function setCardType(type) {
-    
+
     const colors = {
         visa: [
             "#436D99", "#2D57F2"
@@ -51,9 +51,9 @@ const cardNumberPattern = {
             cardtype: "default"
         }
     ],
-    dispatch: function(appended, dynamicMasked) {
+    dispatch: function (appended, dynamicMasked) {
         const number = (dynamicMasked.value + appended).replace(/\D/g, "")
-        const foundMask = dynamicMasked.compiledMasks.find(function(item) {
+        const foundMask = dynamicMasked.compiledMasks.find(function (item) {
             return number.match(item.regex)
         })
         return foundMask
@@ -78,7 +78,7 @@ function updateCardNumber(number) {
 const cardHolder = document.querySelector("#card-holder")
 cardHolder.addEventListener("input", () => {
     const ccHolder = document.querySelector(".cc-holder .value")
-    ccHolder.innerText = cardHolder.value.length === 0 ? "INSIRA O NOME" : cardHolder.value  
+    ccHolder.innerText = cardHolder.value.length === 0 ? "INSIRA O NOME" : cardHolder.value
 })
 
 //################# VALIDADE DO CARTÂO  #######################################
@@ -94,8 +94,8 @@ const expirationDatePattern = {
         },
         YY: {
             mask: IMask.MaskedRange,
-            from: String(new Date().getFullYear()).slice(2) ,
-            to:   String(new Date().getFullYear() + 10).slice(2)
+            from: String(new Date().getFullYear()).slice(2),
+            to: String(new Date().getFullYear() + 10).slice(2)
         }
     }
 }
@@ -115,23 +115,47 @@ securityCodeMasked.on("accept", () => {
     updateSecurityCode(securityCodeMasked.value)
 })
 
-function updateSecurityCode(code){
+function updateSecurityCode(code) {
     const ccSecurity = document.querySelector(".cc-security .value")
     ccSecurity.innerText = code.length === 0 ? "XXX" : code
 }
 
 //################# ADICIONAR CARTÂO  #######################################
 
-const addButton = document.querySelector("#add-card")
-addButton.addEventListener("click", () => {
-    alert("Cartão adicionado!")
-})
-
 document.querySelector("form").addEventListener("submit", (event) => {
     event.preventDefault()
+    const addButton = document.querySelector("#add-card")
+    addButton.addEventListener("click", () => {
+        handleInputs()
+    })
 })
 
+//############################ VALIDAÇÕES ##################################
 
+function handleInputs() {
+    const formInputs = document.querySelectorAll(".input-wrapper input")
+    formInputs.forEach(inputValue => {
+        if (inputValue.value === "" || undefined) {
+            alertError()
+        } else {
+            alertSuccess()
+        }
+    })
+}
+
+const alertEvent = document.querySelector("#alert")
+
+function alertSuccess() {
+    alertEvent.classList.replace("hide", "alert-confirm")
+    alertEvent.children[0].textContent = "Cartão Adicionado com Sucesso!"
+    alertEvent.classList.replace("alert-error", "alert-confirm")
+}
+
+function alertError() {
+    alertEvent.classList.replace("hide", "alert-error")
+    alertEvent.children[0].textContent = "Preencha os dados corretamente!"
+    alertEvent.classList.replace("alert-confirm", "alert-error")
+}
 
 
 
