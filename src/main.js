@@ -102,6 +102,15 @@ const expirationDatePattern = {
 
 const expirationDateMasked = IMask(expirationDate, expirationDatePattern)
 
+expirationDateMasked.on("accept", () => {
+    updateExpirationDate(expirationDateMasked.value)
+  })
+  
+  function updateExpirationDate(date) {
+    const ccExpirationDate = document.querySelector(".cc-extra .value")
+    ccExpirationDate.innerText = date.length === 0 ? "02/32" : date
+  }
+
 
 //################# CVC DO CARTÂO  #######################################
 
