@@ -146,7 +146,8 @@
         <div class="flex">
           <div class="input-wrapper">
             <label for="expiration-date">Expiração</label>
-            <input id="expiration-date" type="month" required/>
+            <input id="expiration-date" type="month" min="2022-10"
+            max="2032-12" required/>
           </div>
 
           <div class="input-wrapper">
@@ -155,7 +156,7 @@
           </div>
         </div>
 
-        <button id="add-card">ADICIONAR CARTÃO</button>
+        <button id="add-card" type="submit">ADICIONAR CARTÃO</button>
       </form>
     </div>
 
