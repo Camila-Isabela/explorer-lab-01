@@ -129,17 +129,12 @@ function updateSecurityCode(code) {
     ccSecurity.innerText = code.length === 0 ? "XXX" : code
 }
 
-//################# ADICIONAR CARTÂO  #######################################
-
-document.querySelector("form").addEventListener("submit", (event) => {
-    event.preventDefault()
-    const addButton = document.querySelector("#add-card")
-    addButton.addEventListener("click", () => {
-        handleInputs()
-    })
-})
-
 //############################ VALIDAÇÕES ##################################
+
+const addButton = document.getElementById("add-card");
+addButton.addEventListener('click', () => {
+    handleInputs()
+});
 
 function handleInputs() {
     const formInputs = document.querySelectorAll(".input-wrapper input")
